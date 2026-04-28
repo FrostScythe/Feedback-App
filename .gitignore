@@ -1,0 +1,7 @@
+target/
+*.class
+*.log
+node_modules/
+.settings/
+.classpath
+.project
