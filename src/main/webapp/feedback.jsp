@@ -24,7 +24,7 @@
     <input type="number" name="phone" placeholder="Enter your number" class="form-control" id="exampleInputPassword1">
   </div>
   <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Your Feedback</label>
+    <label for="feedbackMessage" class="form-label">Your Feedback</label>
     <textArea name="feedback_message" placeholder="Enter Message" rows="10" cols ="" class="form-control"></textArea>
   </div>
   <div class="container text-center">

@@ -2,9 +2,9 @@ package app;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;           // ← needed for Connection
-import java.sql.PreparedStatement;    // ← needed for PreparedStatement
-import java.sql.SQLException;         // ← needed for SQLException
+import java.sql.Connection;           
+import java.sql.PreparedStatement;    
+import java.sql.SQLException;        
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -23,8 +23,13 @@ public class FeedbackServlet extends HttpServlet {
         String phone   = req.getParameter("phone");
         String message = req.getParameter("feedback_message");
 
-        // SQL query — '?' are placeholders (safe, prevents SQL Injection)
         String sql = "INSERT INTO feedback (email, phone, message) VALUES (?, ?, ?)";
+        
+        try {
+        	Class.forName("com.mysql.cj.jdbc.Driver");
+        }catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        }
 
         try (Connection conn = DBConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(sql)) {
