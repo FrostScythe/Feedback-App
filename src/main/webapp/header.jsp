@@ -1,3 +1,9 @@
+<%@ page import="jakarta.servlet.http.HttpSession" %>
+<%
+    HttpSession userSession = request.getSession(false);
+    String loggedUser = (userSession != null) ? (String) userSession.getAttribute("user") : null;
+%>
+
 <nav class="navbar bg-dark navbar-expand-lg bg-body-tertiary" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">Feedback Application</a>
@@ -12,15 +18,26 @@
         <li class="nav-item">
           <a class="nav-link" href="#">About</a>
         </li>
-        
         <li class="nav-item">
           <a class="nav-link disabled" aria-disabled="true">Services</a>
         </li>
       </ul>
-      <form class="d-flex" role="search">
-        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
-        <button class="btn btn-outline-light" type="submit">Search</button>
-      </form>
+
+      <!-- Right side: search + user info -->
+      <div class="d-flex align-items-center gap-3">
+        <form class="d-flex" role="search">
+          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+          <button class="btn btn-outline-light" type="submit">Search</button>
+        </form>
+
+        <% if (loggedUser != null) { %>
+          <span class="text-white">👤 <%= loggedUser %></span>
+          <a href="<%= application.getContextPath() %>/logout" class="btn btn-outline-danger btn-sm">
+            Logout
+          </a>
+        <% } %>
+      </div>
+
     </div>
   </div>
 </nav>
